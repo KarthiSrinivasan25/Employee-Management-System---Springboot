@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9ecef; /* Lighter background color */
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px; /* Set a maximum width for the form */
+            margin: auto; /* Center the container */
+            margin-top: 50px; /* Space from top */
+        }
+        h2 {
+            color: #343a40;
+            margin-bottom: 20px; /* Space below the heading */
+        }
+        .btn {
+            width: 48%; /* Equal width for buttons */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Update Employee</h2>
+    <form th:action="@{/updateEmployee/{id}(id=${employee.id})}" th:object="${employee}" method="post">
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" th:field="*{firstName}" class="form-control" id="firstName" required style="max-width: 100%;">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" th:field="*{lastName}" class="form-control" id="lastName" required style="max-width: 100%;">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" th:field="*{email}" class="form-control" id="email" required style="max-width: 100%;">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Update Employee</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

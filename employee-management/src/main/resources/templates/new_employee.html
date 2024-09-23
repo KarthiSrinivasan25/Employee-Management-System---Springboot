@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light background color */
+        }
+        .container {
+            background-color: #ffffff; /* White container */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 500px; /* Set a maximum width for the form */
+            margin-top: 50px; /* Space from top */
+        }
+        h2 {
+            color: #343a40;
+            margin-bottom: 20px; /* Space below the heading */
+        }
+        .btn {
+            width: 48%; /* Equal width for buttons */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Add Employee</h2>
+    <form th:action="@{/saveEmployee}" th:object="${employee}" method="post">
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" th:field="*{firstName}" required />
+        </div>
+        <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" th:field="*{lastName}" required />
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" th:field="*{email}" required />
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a href="/" class="btn btn-secondary">Back</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

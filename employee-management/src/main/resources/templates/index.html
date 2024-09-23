@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employee Management</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f7fa; /* Light gray background for the entire page */
+        }
+        .container {
+            background-color: #ffffff; /* White background for the main container */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 50px; /* Space from top */
+            position: relative; /* For absolute positioning of the notification */
+        }
+        h2 {
+            color: #343a40;
+            margin-bottom: 20px; /* Space below the heading */
+        }
+        .alert {
+            position: absolute; /* Position the alert in the container */
+            right: 15px; /* Align to the right */
+            top: 85px; /* Adjust vertical position */
+            width: auto; /* Adjust width */
+            margin: 0; /* No margin */
+            transition: opacity 0.5s ease-in-out;
+            opacity: 1;
+        }
+        .table th, .table td {
+            vertical-align: middle; /* Center align content */
+        }
+        .table {
+            margin-top: 20px; /* Space above the table */
+        }
+        .btn-primary {
+            margin-bottom: 15px; /* Space below the button */
+        }
+    </style>
+    <script>
+        function hideMessage() {
+            const messageDiv = document.getElementById('notification');
+            if (messageDiv) {
+                setTimeout(() => {
+                    messageDiv.style.opacity = '0'; // Fade out
+                    setTimeout(() => {
+                        messageDiv.style.display = 'none'; // Hide after fade
+                    }, 500); // Match fade duration
+                }, 3000); // Hide after 3 seconds
+            }
+        }
+    </script>
+</head>
+<body onload="hideMessage()">
+
+<div class="container">
+    <h2 class="text-center">Employee Management System</h2>
+    
+    <a href="/showNewEmployeeForm" class="btn btn-primary">Add New Employee</a>
+    
+    <div th:if="${message}" id="notification" class="alert alert-success alert-dismissible fade show">
+        <strong>Success!</strong> <span th:text="${message}"></span>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="hideMessage()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="employee : ${listEmployees}">
+                <td th:text="${employee.id}"></td>
+                <td th:text="${employee.firstName}"></td>
+                <td th:text="${employee.lastName}"></td>
+                <td th:text="${employee.email}"></td>
+                <td>
+                    <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-warning">Edit</a>
+                    <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
